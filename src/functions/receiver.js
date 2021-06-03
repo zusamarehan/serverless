@@ -1,5 +1,5 @@
 'use strict';
-const store = require('./store');
+const store = require('../helpers/store');
 
 module.exports.receiver = async (event) => {
     await store.store(event, 'success_logger');

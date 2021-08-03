@@ -13,37 +13,33 @@ provider:
   lambdaHashingVersion: 20201221
 
   # you can overwrite defaults here
-  #  stage: dev
-  #  region: us-east-1
-
-  # you can add statements to the Lambda function's IAM Role here
-  #  iamRoleStatements:
-  #    - Effect: "Allow"
-  #      Action:
-  #        - "s3:ListBucket"
-  #      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-  #    - Effect: "Allow"
-  #      Action:
-  #        - "s3:PutObject"
-  #      Resource:
-  #        Fn::Join:
-  #          - ""
-  #          - - "arn:aws:s3:::"
-  #            - "Ref" : "ServerlessDeploymentBucket"
-  #            - "/*"
+  #stage: local
+  #region: us-east-1
 
   # you can define service wide environment variables here
-  environment:
-    #postgresql
-    POSTGRESQL_HOST: 'localhost'
-    POSTGRESQL_PORT: '5432'
-    #common
-    DB_NAME: 'success_virtual_se'
-    USERNAME: 'postgres'
-    PASSWORD: 'password'
+#  environment:
+#    #postgresql
+#    POSTGRESQL_HOST: 'localhost'
+#    POSTGRESQL_PORT: '5432'
+#    #common
+#    DB_NAME: 'success_virtual_se'
+#    USERNAME: 'postgres'
+#    PASSWORD: 'password'
 
 functions:
   classifier:
     handler: src/functions/classifier.classifier
   receiver:
     handler: src/functions/receiver.receiver
+
+custom:
+  localstack:
+    debug: false
+    stages:
+      - local
+      - dev
+    host: http://localhost
+    endpointFile: endpoints.json
+
+plugins:
+  - serverless-localstack

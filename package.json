@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "serverless-localstack": "^0.4.32"
   },
   "author": "",
   "license": "ISC"
